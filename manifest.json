@@ -1,0 +1,19 @@
+{
+  "name": "colors",
+  "version": "0.1",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "css": [],
+      "js": [
+        "index.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": ["*://*/*"]
+}
