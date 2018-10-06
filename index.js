@@ -55,12 +55,25 @@ function addSelector() {
   document.getElementById("selector-container").insertAdjacentElement("beforeend", selectorInputElements);
 }
 
+function clearAllUpdates() {
+  var updatedElements = document.querySelectorAll(".selector-text-input");
+  [].forEach.call(updatedElements, function(el) {
+    var selector = el.value;
+    var codeToUpdateColor = "document.querySelector('" + selector + "').style.backgroundColor='inherit'";
+    chrome.tabs.executeScript(null,
+        {code: codeToUpdateColor}
+    );
+    el.value = "";
+  })
+}
 
 document.addEventListener("DOMContentLoaded", function() {
-  
+
   document.querySelector(".apply-color-button").addEventListener("click", changeColorByCssSelector);
 
   document.querySelector(".remove-selector-button").addEventListener("click", removeSelector);
 
   document.getElementById("add-selector-input").addEventListener("click", addSelector);
+
+  document.getElementById("clear-all").addEventListener("click", clearAllUpdates);
 });
